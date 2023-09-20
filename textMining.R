@@ -1,4 +1,3 @@
-#33660638
 #### Loading useful packages and loading data #### 
 library(dplyr)
 library(tidytext)
@@ -24,8 +23,8 @@ library(rpart.plot)
 library(randomForest)
 
 # Rread data set 
-setwd("/Users/maoyubohe618/Documents/R/R_script/assignments/individual_final")
-df <- read.csv("/Users/maoyubohe618/Documents/R/R_script/assignments/individual_final/original_data/journal_data.csv", header = TRUE)
+setwd("set your own working directory")
+df <- read.csv("read your dataset.csv", header = TRUE)
 
 dim(df) #4384*9
 summary(df)
@@ -439,13 +438,7 @@ for (year in c(2019, 2020, 2021, 2022)){
 
 
 
-
-
-
-
-
-
-
+       
 ###### Model 1-A ######
 df_cluster <- df %>% select(year, pages, views, citations, altmetric, journal, abstract)
 df_cluster2 <- df_cluster[which(df_cluster$pages <= 20 & df_cluster$views <= 750 &
@@ -473,9 +466,6 @@ R2_1<- R2(pred1tr, citations_training_data$citations)
 pred1test <- citations_reg1 %>% predict(citations_test_data)
 RMSE2 <- RMSE(pred1test, citations_test_data$citations)
 R2_2<- R2(pred1test, citations_test_data$citations)
-
-
-
 
 
 
@@ -513,6 +503,7 @@ RMSE_R2_table
 
 
 
+       
 ##### Clustering ######
 # Prepare numeric data set from original df
 df_cluster <- df %>% select(year, pages, views, citations, altmetric, journal, abstract)
@@ -613,6 +604,7 @@ cluster_tf_idf %>%
   coord_flip() +
   theme_bw()  
 
+       
 
 ##### PCA on data clustering #####
 # Standardize the data scale and implement PCA
@@ -753,7 +745,6 @@ head(simulation_word_cooccurences, 100) %>%
   geom_node_text(aes(label = as.character(name)), vjust = 2, col = "darkblue") +
   ggtitle(sprintf("\n%s", "Abstract Of Simulation: Co-Occurrence of Words(Top 100)")) +
   theme_void()
-
 
 
 
